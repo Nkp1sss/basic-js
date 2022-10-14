@@ -15,7 +15,15 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function isMAC48Address(n) {
-  
+  let symbolsMAC = '0123456789ABCDEF-';
+
+  let isTrue = 1;
+  n.split('').forEach(symbol => {
+    if (!symbolsMAC.includes(symbol))
+      isTrue = 0;
+  });
+
+  return isTrue ? true : false;
 }
 module.exports = {
   isMAC48Address
