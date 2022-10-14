@@ -16,7 +16,27 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function renameFiles(names) {
+  let coincidences = []; // совпадения
 
+  let newNames = names.map(name => {
+    let amountRepetition = 0;
+    if (coincidences.includes(name)) {
+      coincidences.forEach(element => {
+        if (name == element) {
+          amountRepetition++;
+        }
+      });
+      coincidences.push(name);
+      coincidences.push(`${name}(${amountRepetition})`);
+      return `${name}(${amountRepetition})`;
+    }
+    else {
+      coincidences.push(name);
+      return name;
+    }
+  })
+
+  return newNames;
 }
 
 module.exports = {
