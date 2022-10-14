@@ -17,13 +17,13 @@ function deleteDigit(n) {
 
   let currentValue;
   for(let i = 0; i < array.join('').length; i++) {
-    currentValue = n;
+    currentValue = array.map(elem => elem);
     currentValue.splice(i, 1);
-    if (currentValue > maxNumber)
-      maxNumber = currentValue;
+    if (+currentValue.join('') > maxNumber)
+      maxNumber = +currentValue.join('');
   }
 
-  return maxNumber;
+  return maxNumber
 }
 
 module.exports = {
