@@ -23,9 +23,44 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(matrix) {
+  let field = new Array(matrix.length);
+  for (let i = 0; i < matrix.length; i++) {
+    field[i] = new Array(matrix[0].length);
+    for (let j = 0; j < matrix[0].length; j++) {
+      field[i][j] = 0;
+    }
+  }
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[0].length; j++) {
+      if (matrix[i][j] == true) {
+        if (isCorresponds(field, i - 1, j - 1))
+          field[i - 1][j - 1] += 1;
+        if (isCorresponds(field, i - 1, j))
+          field[i - 1][j] += 1;
+        if (isCorresponds(field, i - 1, j + 1))
+          field[i - 1][j + 1] += 1;
+        if (isCorresponds(field, i, j - 1))
+          field[i][j - 1] += 1;
+        if (isCorresponds(field, i, j + 1))
+          field[i][j + 1] += 1;
+        if (isCorresponds(field, i + 1, j - 1))
+          field[i + 1][j - 1] += 1;
+        if (isCorresponds(field, i + 1, j))
+          field[i + 1][j] += 1;
+        if (isCorresponds(field, i + 1, j + 1))
+          field[i + 1][j + 1] += 1;
+      }
+    }
+  }
+
+  return field;
+}
+
+function isCorresponds(field, i, j) {
+  if (i < 0 || j < 0 || i > field.length - 1 || j > field[i].length - 1) return false;
+  return true;
 }
 
 module.exports = {
